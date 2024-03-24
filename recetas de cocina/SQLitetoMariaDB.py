@@ -1,9 +1,10 @@
+import sqlalchemy
 from sqlalchemy import create_engine, Column, Integer, String, Text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 # Conexión a la base de datos MariaDB
-engine = create_engine('mysql+mysqlconnector://usuario:contraseña@localhost/nombre_basedatos')
+engine = create_engine('mysql+mysqlconnector://root:rubik02@localhost/bd_recetas')
 Session = sessionmaker(bind=engine)
 session = Session()
 
@@ -42,6 +43,45 @@ def agregar_receta():
     session.commit()
     print("Receta agregada correctamente.")
 
+def actualizar_receta():
+    id_receta = input("ID de la receta a actualizar: ")
+    receta = session.query(Receta).filter_by(id=id_receta).first()
+
+    if receta:
+        print("Receta actual:")
+        print(f"Nombre: {receta.nombre}")
+        print(f"Ingredientes: {receta.ingredientes}")
+        print(f"Pasos: {receta.pasos}")
+
+        nuevo_nombre = input("Nuevo nombre (dejar vacío para mantener el mismo): ")
+        nuevo_ingredientes = input("Nuevos ingredientes (dejar vacío para mantener los mismos): ")
+        nuevo_pasos = input("Nuevos pasos (dejar vacío para mantener los mismos): ")
+
+        if nuevo_nombre:
+            receta.nombre = nuevo_nombre
+        if nuevo_ingredientes:
+            receta.ingredientes = nuevo_ingredientes
+        if nuevo_pasos:
+            receta.pasos = nuevo_pasos
+
+        session.commit()
+        print("Receta actualizada correctamente.")
+    else:
+        print("No se encontró ninguna receta con ese ID.")
+
+def eliminar_receta():
+    id_receta = input("ID de la receta a eliminar: ")
+    receta = session.query(Receta).filter_by(id=id_receta).first()
+
+    if receta:
+        confirmacion = input(f"¿Estás seguro de que deseas eliminar la receta '{receta.nombre}'? (s/n): ")
+        if confirmacion.lower() == 's':
+            session.delete(receta)
+            session.commit()
+            print("Receta eliminada correctamente.")
+    else:
+        print("No se encontró ninguna receta con ese ID.")
+
 def ver_recetas():
     recetas = session.query(Receta).all()
     for receta in recetas:
@@ -67,6 +107,10 @@ def main():
 
         if opcion == 'a':
             agregar_receta()
+        elif opcion == 'b':
+            actualizar_receta()
+        elif opcion == 'c':
+            eliminar_receta()
         elif opcion == 'd':
             ver_recetas()
         elif opcion == 'e':
