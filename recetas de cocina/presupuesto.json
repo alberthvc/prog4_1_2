@@ -1,0 +1,17 @@
+[
+    {
+        "nombre": "mosquito",
+        "cantidad": 1000.0,
+        "precio_unitario": 0.0001
+    },
+    {
+        "nombre": "freno",
+        "cantidad": 23.0,
+        "precio_unitario": 23.0
+    },
+    {
+        "nombre": "silla",
+        "cantidad": 4.0,
+        "precio_unitario": 34.0
+    }
+]
