@@ -13,5 +13,20 @@
         "nombre": "silla",
         "cantidad": 4.0,
         "precio_unitario": 34.0
+    },
+    {
+        "nombre": "caballo",
+        "cantidad": 2.0,
+        "precio_unitario": 400.0
+    },
+    {
+        "nombre": "vaca",
+        "cantidad": 5.0,
+        "precio_unitario": 800.0
+    },
+    {
+        "nombre": "gato",
+        "cantidad": 9.0,
+        "precio_unitario": 900.0
     }
 ]
