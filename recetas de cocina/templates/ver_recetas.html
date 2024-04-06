@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ver Recetas</title>
+</head>
+<body>
+    <h1>Recetas</h1>
+    <ul>
+    {% for receta in recetas %}
+        <li>
+            <strong>{{ receta['nombre'] }}</strong><br>
+            Ingredientes: {{ receta['ingredientes'] }}<br>
+            Pasos: {{ receta['pasos'] }}
+        </li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
