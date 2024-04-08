@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirmar Eliminar Receta</title>
+</head>
+<body>
+    <h1>Confirmar Eliminar Receta</h1>
+    <p>¿Estás seguro de que quieres eliminar la receta "{{ receta['nombre'] }}"?</p>
+
+    <!-- Formulario para eliminar la receta -->
+    <form action="{{ url_for('eliminar_receta', nombre=receta['nombre']) }}" method="post">
+        <input type="submit" value="Eliminar">
+    </form>
+
+    <!-- Enlace para cancelar -->
+    <a href="{{ url_for('ver_recetas') }}">Cancelar</a>
+</body>
+</html>
