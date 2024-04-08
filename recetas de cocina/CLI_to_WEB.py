@@ -34,6 +34,8 @@ def ver_recetas():
     recetas = []
     for key in recetas_keys:
         receta = redis_client.hgetall(key)
+        # Imprimir el contenido de la receta
+        print("Receta:", receta)
         recetas.append(receta)
     return render_template('ver_recetas.html', recetas=recetas)
 
