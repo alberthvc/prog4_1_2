@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar Recetas</title>
+</head>
+<body>
+    <h1>Agregar Receta</h1>
+    <form action="{{ url_for('agregar_receta') }}" method="post">
+        Nombre: <input type="text" name="nombre"><br>
+        Ingredientes: <input type="text" name="ingredientes"><br>
+        Pasos: <input type="text" name="pasos"><br>
+        <input type="submit" value="Agregar">
+    </form>
+</body>
+</html>

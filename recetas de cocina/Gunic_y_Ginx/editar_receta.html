@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Receta</title>
+</head>
+<body>
+    <h1>Editar Receta</h1>
+    <form action="{{ url_for('editar_receta', id=receta[0]) }}" method="post">
+        Nombre: <input type="text" name="nombre" value="{{ receta[1] }}"><br>
+        Ingredientes: <input type="text" name="ingredientes" value="{{ receta[2] }}"><br>
+        Pasos: <input type="text" name="pasos" value="{{ receta[3] }}"><br>
+        <input type="submit" value="Guardar">
+    </form>
+</body>
+</html>
