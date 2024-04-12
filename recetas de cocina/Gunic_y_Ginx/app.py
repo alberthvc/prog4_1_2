@@ -1,7 +1,24 @@
 from flask import Flask, render_template, request, redirect, url_for
-import sqlite3
+from my_celery import Celery
+from flask_mail import Mail
 
 app = Flask(__name__)
+app.config['CELERY_BROKER_URL'] = 'redis://localhost:6379/0'
+app.config['MAIL_SERVER'] = 'smtp.example.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'your-email@example.com'
+app.config['MAIL_PASSWORD'] = 'your-email-password'
+
+celery = Celery(app.name, broker=app.config['CELERY_BROKER_URL'])
+celery.conf.update(app.config)
+
+mail = Mail(app)
+
+# tasks.py
+from my_celery import Celery
+from flask_mail import Message
+from app import mail
 
 # Configuración de la base de datos SQLite
 DB_FILE = 'recetas.db'
@@ -86,6 +103,13 @@ def eliminar_receta(id):
     conn.commit()
     conn.close()
     return redirect(url_for('ver_recetas'))
+
+@celery.task
+def send_email(subject, sender, recipients, body):
+    msg = Message(subject=subject, sender=sender, recipients=recipients)
+    msg.body = body
+    mail.send(msg)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
