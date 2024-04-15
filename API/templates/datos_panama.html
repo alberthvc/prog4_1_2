@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos de la Fila</title>
+</head>
+<body>
+    <h1>Datos de la Fila</h1>
+    <table border="1">
+        <tbody>
+            {% for columna, valor in fila.items() %}
+                <tr>
+                    <td><strong>{{ columna }}</strong></td>
+                    <td>{{ valor }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
